@@ -20,7 +20,7 @@ export function Details() {
   }
 
   async function handleDeleteNote() {
-    const confirm = confirm("Você deseja excluir esta nota?");
+    const confirm = window.confirm("Você deseja excluir esta nota?");
 
     if (!confirm) return;
 
