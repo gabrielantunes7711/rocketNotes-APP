@@ -6,8 +6,9 @@ export const AuthContext = createContext({});
 function AuthProvider({ children }) {
   const [data, setData] = useState({});
 
-  async function signIn({ email, password }) {
+  async function signIn({ email, password, setLoading }) {
     try {
+      setLoading((prevState) => !prevState);
       const response = await api.post("/sessions", { email, password });
       const { user, token } = response.data;
       const userData = {
@@ -22,6 +23,7 @@ function AuthProvider({ children }) {
       api.defaults.headers.common["authorization"] = `Bearer ${token}`;
       setData({ user: userData, token });
     } catch (error) {
+      setLoading((prevState) => !prevState);
       if (error.response) {
         alert(error.response.data.message);
       } else {

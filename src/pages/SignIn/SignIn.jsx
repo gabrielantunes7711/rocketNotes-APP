@@ -8,19 +8,23 @@ import { Button } from "../../components/Button/Button";
 
 import { Background, Container, Form } from "./styles";
 import { useState } from "react";
+import { Loading } from "../../components/Loading/Loading";
 
 export const SignIn = () => {
   const [email, setEmail] = useState({});
   const [password, setPassword] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const { signIn } = useAuth();
 
   function handleSignIn() {
-    signIn({ email, password });
+    signIn({ email, password, setLoading });
   }
 
   return (
     <Container>
+      {loading && <Loading />}
+
       <Form>
         <h1>Rocket Notes</h1>
         <p>Aplicação para salvar e gerenciar seus links úteis</p>
